@@ -2,11 +2,14 @@ public class QueenBoard {
   private int[][]board;
 
   public QueenBoard(int size) {
+  	/*
     for (int r = 0; r < size; r++) {
       for (int c = 0; c < size; c++) {
         board[r][c] = 0;
+        //System.out.println("success");
       }
-    }
+    }*/
+    board = new int[size][size];
   }
   
   public boolean addQueen(int r, int c) {
