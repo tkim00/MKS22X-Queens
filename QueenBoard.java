@@ -84,4 +84,27 @@ public class QueenBoard {
     }
     return false;
   }
+  public int countSolutions() {
+    for (int r = 0; r < board.length; r++) {
+      for (int c = 0; c < board.length; c++) {
+        if (board[r][c]!=0) {
+          throw new IllegalStateException("Board has to be cleared!");
+        }
+      }
+    }
+    return countSolutionsR(0, 0);
+  }
+  public int countSolutionsR(int col, int sols) {
+    if (col >= board.length) {
+      sols++;
+      return sols;
+    }
+    for (int r = 0; r < board.length; r++) {
+      if (addQueen(r, col)) {
+        sols += countSolutionsR(col+1, sols);
+        removeQueen(r, col);
+      }
+    }
+    return sols;
+  }
 }
