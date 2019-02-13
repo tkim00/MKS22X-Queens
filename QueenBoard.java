@@ -17,10 +17,10 @@ public class QueenBoard {
   		board[r][c] = -1;
       for (int i = 1; c+i < board.length; i++) {
         board[r][c+i] += 1;
-        if (r+i < board.length) {
+        if (r+i < board.length) { //only add if there are any space below
           board[r+i][c+i] += 1;
         }
-        if (r-i > 0) {
+        if (r-i > 0) { //only add if there are any space above
           board[r-i][c+i] += 1;
         }
       }
@@ -33,10 +33,10 @@ public class QueenBoard {
   		board[r][c] = 0;
       for (int i = 1; c+i < board.length; i++) {
         board[r][c+i] -= 1;
-        if (r+i < board.length) {
+        if (r+i < board.length) { //only remove if there are any space below
           board[r+i][c+i] -= 1;
         }
-        if (r-i > 0) {
+        if (r-i > 0) { //vice versa
           board[r-i][c+i] -= 1;
         }
       }
@@ -68,18 +68,18 @@ public class QueenBoard {
         }
       }
     }
-    return solveR(0);
+    return solveR(0); //helper function to pass column as a parameter
   }
   public boolean solveR(int col) {
     if (col >= board.length) {
       return true;
     }
     for (int r = 0; r < board.length; r++) {
-      if (addQueen(r, col)) {
-        if (solveR(col+1)) {
+      if (addQueen(r, col)) { //if Queen is addable
+        if (solveR(col+1)) { //proceeds to the next column
           return true;
         }
-        removeQueen(r, col);
+        removeQueen(r, col); //if Queen cannot be added at all in a column, remove the Queen previous to that column
       }
     }
     return false;
