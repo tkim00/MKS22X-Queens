@@ -20,7 +20,7 @@ public class QueenBoard {
         if (r+i < board.length) { //only add if there are any space below
           board[r+i][c+i] += 1;
         }
-        if (r-i > 0) { //only add if there are any space above
+        if (r-i >= 0) { //only add if there are any space above
           board[r-i][c+i] += 1;
         }
       }
@@ -36,7 +36,7 @@ public class QueenBoard {
         if (r+i < board.length) { //only remove if there are any space below
           board[r+i][c+i] -= 1;
         }
-        if (r-i > 0) { //vice versa
+        if (r-i >= 0) { //vice versa
           board[r-i][c+i] -= 1;
         }
       }
@@ -92,16 +92,17 @@ public class QueenBoard {
         }
       }
     }
-    return countSolutionsR(0, 0);
+    return countSolutionsR(0);
   }
-  public int countSolutionsR(int col, int sols) {
+  public int countSolutionsR(int col) {
+    int sols = 0;
     if (col >= board.length) {
-      sols++;
-      return sols;
+      //System.out.println(this);
+      return 1;
     }
     for (int r = 0; r < board.length; r++) {
       if (addQueen(r, col)) {
-        sols += countSolutionsR(col+1, sols);
+        sols += countSolutionsR(col+1);
         removeQueen(r, col);
       }
     }
